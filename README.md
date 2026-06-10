@@ -147,12 +147,6 @@ The package root is:
 conann/
 ```
 
-The ConANN/FAISS C++ source used by the build lives at:
-
-```text
-../conann-main/conann
-```
-
 Useful scripts:
 
 ```text
