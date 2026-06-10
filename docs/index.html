@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Documentation for conann, a CPU-focused Python package for ConANN-enabled FAISS IVF search.">
+    <title>conann documentation</title>
+    <link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="14" fill="%23164f60"/%3E%3Ctext x="32" y="42" text-anchor="middle" font-family="Arial" font-size="34" font-weight="700" fill="white"%3EC%3C/text%3E%3C/svg%3E'>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="conann documentation home">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <span>conann</span>
+        </a>
+        <div class="nav-links">
+          <a href="#install">Install</a>
+          <a href="#quickstart">Quickstart</a>
+          <a href="api.html">API Reference</a>
+          <a href="#examples">Examples</a>
+          <a href="#build">Build</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">CPU IVF search with ConANN-enabled FAISS bindings</p>
+          <h1>conann</h1>
+          <p class="lead">
+            A Python package for running ConANN-style adaptive IVF search through a familiar FAISS-like API.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#install">Install</a>
+            <a class="button secondary" href="https://github.com/smoothy100x/conann/">GitHub</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="ConANN workflow diagram">
+          <svg viewBox="0 0 760 420" role="img" aria-labelledby="diagram-title diagram-desc">
+            <title id="diagram-title">ConANN IVF workflow</title>
+            <desc id="diagram-desc">Vectors enter an IVF index, calibration computes a threshold, and query-time search stops adaptively.</desc>
+            <defs>
+              <linearGradient id="boxGrad" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#eef7ff"/>
+                <stop offset="100%" stop-color="#d9ece7"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="760" height="420" rx="18" fill="#f7faf9"/>
+            <g fill="none" stroke="#2e5f73" stroke-width="3" stroke-linecap="round">
+              <path d="M160 110 H295"/>
+              <path d="M465 110 H600"/>
+              <path d="M380 170 V250"/>
+              <path d="M160 310 H295"/>
+              <path d="M465 310 H600"/>
+            </g>
+            <g fill="#2e5f73">
+              <path d="M295 110 l-12 -7 v14 z"/>
+              <path d="M600 110 l-12 -7 v14 z"/>
+              <path d="M380 250 l-7 -12 h14 z"/>
+              <path d="M295 310 l-12 -7 v14 z"/>
+              <path d="M600 310 l-12 -7 v14 z"/>
+            </g>
+            <g>
+              <rect x="40" y="65" width="120" height="90" rx="10" fill="url(#boxGrad)" stroke="#b9d1d6"/>
+              <text x="100" y="101" text-anchor="middle" class="svg-title">Vectors</text>
+              <text x="100" y="126" text-anchor="middle" class="svg-small">NumPy arrays</text>
+
+              <rect x="300" y="65" width="165" height="90" rx="10" fill="url(#boxGrad)" stroke="#b9d1d6"/>
+              <text x="382" y="101" text-anchor="middle" class="svg-title">IVF index</text>
+              <text x="382" y="126" text-anchor="middle" class="svg-small">centroid lists</text>
+
+              <rect x="605" y="65" width="115" height="90" rx="10" fill="url(#boxGrad)" stroke="#b9d1d6"/>
+              <text x="662" y="101" text-anchor="middle" class="svg-title">Ground</text>
+              <text x="662" y="126" text-anchor="middle" class="svg-small">truth</text>
+
+              <rect x="275" y="250" width="210" height="90" rx="10" fill="url(#boxGrad)" stroke="#b9d1d6"/>
+              <text x="380" y="286" text-anchor="middle" class="svg-title">Calibration</text>
+              <text x="380" y="311" text-anchor="middle" class="svg-small">threshold for FNR</text>
+
+              <rect x="40" y="265" width="120" height="90" rx="10" fill="url(#boxGrad)" stroke="#b9d1d6"/>
+              <text x="100" y="301" text-anchor="middle" class="svg-title">Query</text>
+              <text x="100" y="326" text-anchor="middle" class="svg-small">embedding</text>
+
+              <rect x="605" y="265" width="115" height="90" rx="10" fill="url(#boxGrad)" stroke="#b9d1d6"/>
+              <text x="662" y="301" text-anchor="middle" class="svg-title">Adaptive</text>
+              <text x="662" y="326" text-anchor="middle" class="svg-small">top-k result</text>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="stat-grid">
+          <div>
+            <span class="stat">3.10-3.14</span>
+            <span class="stat-label">CPython versions</span>
+          </div>
+          <div>
+            <span class="stat">Linux + Windows</span>
+            <span class="stat-label">prebuilt wheels</span>
+          </div>
+          <div>
+            <span class="stat">CPU IVF</span>
+            <span class="stat-label">current focus</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="install" class="section">
+        <div class="section-header">
+          <p class="eyebrow">Install</p>
+          <h2>Get the package from PyPI</h2>
+        </div>
+        <div class="code-block">
+          <button class="copy-button" data-copy="pip install conann" type="button">Copy</button>
+          <pre><code>pip install conann</code></pre>
+        </div>
+        <p>
+          Supported wheels are available for CPython 3.10 through 3.14 on Linux x86_64 and Windows win_amd64.
+          The package is CPU-only.
+        </p>
+      </section>
+
+      <section id="quickstart" class="section split">
+        <div>
+          <p class="eyebrow">Quickstart</p>
+          <h2>Run a basic vector search</h2>
+          <p>
+            `conann` accepts contiguous `float32` NumPy arrays, similar to the FAISS Python API.
+          </p>
+        </div>
+        <div class="code-block">
+          <button class="copy-button" data-copy="import numpy as np&#10;import conann&#10;&#10;d = 32&#10;xb = np.random.random((5000, d)).astype('float32')&#10;xq = np.random.random((100, d)).astype('float32')&#10;&#10;index = conann.IndexFlatL2(d)&#10;index.add(xb)&#10;distances, labels = index.search(xq, 5)" type="button">Copy</button>
+          <pre><code>import numpy as np
+import conann
+
+d = 32
+xb = np.random.random((5000, d)).astype("float32")
+xq = np.random.random((100, d)).astype("float32")
+
+index = conann.IndexFlatL2(d)
+index.add(xb)
+distances, labels = index.search(xq, 5)</code></pre>
+        </div>
+      </section>
+
+      <section id="conann-api" class="section">
+        <div class="section-header">
+          <p class="eyebrow">ConANN API</p>
+          <h2>Calibrate once, search adaptively</h2>
+          <p>
+            This page explains the main workflow. The full generated API reference lists every public import, class, function, constant, and helper exposed by the module.
+          </p>
+          <a class="inline-action" href="api.html">Open full API reference</a>
+        </div>
+        <div class="api-grid">
+          <article>
+            <h3><code>calibrate_conann(...)</code></h3>
+            <p>Computes ConANN calibration parameters from query vectors and exact ground truth.</p>
+          </article>
+          <article>
+            <h3><code>search_conann(...)</code></h3>
+            <p>Runs adaptive IVF search using the calibration output.</p>
+          </article>
+          <article>
+            <h3><code>evaluate_conann(...)</code></h3>
+            <p>Compares returned labels against ground truth and reports FNR.</p>
+          </article>
+          <article>
+            <h3><code>conann_time_report()</code></h3>
+            <p>Returns timing fields from the ConANN calibration/search path.</p>
+          </article>
+        </div>
+        <div class="code-block wide">
+          <button class="copy-button" data-copy="exact = conann.IndexFlatL2(d)&#10;exact.add(xb)&#10;_, ground_truth = exact.search(xq, k)&#10;&#10;quantizer = conann.IndexFlatL2(d)&#10;ivf = conann.IndexIVFFlat(quantizer, d, 64, conann.METRIC_L2)&#10;ivf.train(xb)&#10;ivf.add(xb)&#10;&#10;calibration = ivf.calibrate_conann(alpha=0.2, k=k, xq=xq, ground_truth=ground_truth, calib_sz=0.5, tune_sz=0.25, dataset_key='example')&#10;distances, labels = ivf.search_conann(xq, calibration, k=k)" type="button">Copy</button>
+          <pre><code>exact = conann.IndexFlatL2(d)
+exact.add(xb)
+_, ground_truth = exact.search(xq, k)
+
+quantizer = conann.IndexFlatL2(d)
+ivf = conann.IndexIVFFlat(quantizer, d, 64, conann.METRIC_L2)
+ivf.train(xb)
+ivf.add(xb)
+
+calibration = ivf.calibrate_conann(
+    alpha=0.2,
+    k=k,
+    xq=xq,
+    ground_truth=ground_truth,
+    calib_sz=0.5,
+    tune_sz=0.25,
+    dataset_key="example",
+)
+distances, labels = ivf.search_conann(xq, calibration, k=k)</code></pre>
+        </div>
+      </section>
+
+      <section id="examples" class="section">
+        <div class="section-header">
+          <p class="eyebrow">Examples</p>
+          <h2>Common usage patterns</h2>
+        </div>
+        <div class="example-list">
+          <a href="https://github.com/smoothy100x/conann/tree/main/examples">NumPy flat search</a>
+          <a href="https://github.com/smoothy100x/conann/tree/main/examples">IVF baseline</a>
+          <a href="https://github.com/smoothy100x/conann/tree/main/examples">Full ConANN workflow</a>
+          <a href="https://github.com/smoothy100x/conann/tree/main/examples">PyTorch embeddings</a>
+          <a href="https://github.com/smoothy100x/conann/tree/main/examples">scikit-learn text vectors</a>
+          <a href="https://github.com/smoothy100x/conann/tree/main/examples">Index I/O and metadata</a>
+        </div>
+      </section>
+
+      <section id="build" class="section split">
+        <div>
+          <p class="eyebrow">Build notes</p>
+          <h2>Native wheels are compiled per platform</h2>
+          <p>
+            Linux wheels are built in a manylinux container and repaired with auditwheel.
+            Windows wheels are built with Visual Studio Build Tools, CMake, SWIG, vcpkg, and pyenv-win.
+          </p>
+        </div>
+        <div class="build-card">
+          <h3>Current scope</h3>
+          <ul>
+            <li>CPU-only package path</li>
+            <li>ConANN-enabled IVF search</li>
+            <li>Linux x86_64 manylinux wheels</li>
+            <li>Windows win_amd64 wheels</li>
+            <li>No GPU FAISS support in this package</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="links" class="section compact">
+        <h2>Project links</h2>
+        <div class="link-row">
+          <a href="https://pypi.org/project/conann/">PyPI</a>
+          <a href="https://github.com/smoothy100x/conann/">GitHub</a>
+          <a href="https://github.com/smoothy100x/conann-c-benchmark">C benchmark</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>conann documentation</span>
+      <span>CPU-focused ConANN-enabled FAISS bindings for Python</span>
+    </footer>
+
+    <script>
+      document.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const value = button.getAttribute("data-copy");
+          try {
+            await navigator.clipboard.writeText(value);
+            button.textContent = "Copied";
+            setTimeout(() => {
+              button.textContent = "Copy";
+            }, 1200);
+          } catch {
+            button.textContent = "Select";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -21,6 +21,12 @@ hand.
 pip install conann
 ```
 
+Documentation:
+
+```text
+https://smoothy100x.github.io/conann/
+```
+
 Supported wheels are built for:
 
 - Python `3.10`, `3.11`, `3.12`, `3.13`, `3.14`
