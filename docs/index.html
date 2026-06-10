@@ -4,13 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Documentation for conann, a CPU-focused Python package for calibrated, adaptive FAISS IVF search.">
-    <meta name="theme-color" content="#0b1530">
-    <title>conann — calibrated adaptive IVF search</title>
+    <meta name="theme-color" content="#070b14">
+    <title>conann | calibrated adaptive IVF search</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="16" fill="%230b1530"/%3E%3Ccircle cx="32" cy="32" r="18" fill="none" stroke="%2358d8c7" stroke-width="4"/%3E%3Ccircle cx="40" cy="24" r="5" fill="%23ffb84d"/%3E%3C/svg%3E'>
-    <script>document.documentElement.classList.add("js")</script>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -41,10 +40,6 @@
           </div>
           <div class="nav-actions">
             <a class="nav-github" href="https://github.com/smoothy100x/conann/" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">
-              <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
-              <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
-            </button>
           </div>
         </div>
       </nav>
@@ -54,9 +49,9 @@
       <section class="hero" id="top">
         <div class="hero-grid shell">
           <div class="hero-copy reveal">
-            <div class="status-pill"><span class="status-dot" aria-hidden="true"></span> CPU-first · Python 3.10–3.14</div>
+            <div class="status-pill"><span class="status-dot" aria-hidden="true"></span> CPU-first · Python 3.10 to 3.14</div>
             <h1>Adaptive IVF search,<br><em>calibrated</em> to your recall target.</h1>
-            <p class="lead">conann brings ConANN-style adaptive probing to a familiar FAISS-like Python API—so the index can search only as far as each query needs.</p>
+            <p class="lead">conann brings ConANN-style adaptive probing to a familiar FAISS-like Python API, letting the index can search only as far as each query needs.</p>
 
             <div class="hero-actions" aria-label="Primary actions">
               <a class="button primary" href="#quickstart">Start searching <span aria-hidden="true">→</span></a>
@@ -132,7 +127,7 @@
 
       <section class="compatibility-rail" aria-label="Package compatibility">
         <div class="shell compatibility-grid">
-          <div><span class="rail-index">01</span><strong>CPython 3.10–3.14</strong><small>supported runtimes</small></div>
+          <div><span class="rail-index">01</span><strong>CPython 3.10 to 3.14</strong><small>supported runtimes</small></div>
           <div><span class="rail-index">02</span><strong>Linux + Windows</strong><small>prebuilt wheels</small></div>
           <div><span class="rail-index">03</span><strong>CPU IVF</strong><small>current package focus</small></div>
           <div><span class="rail-index">04</span><strong>FAISS-like API</strong><small>familiar index workflow</small></div>
@@ -311,17 +306,6 @@
     <div class="copy-toast" role="status" aria-live="polite">Copied to clipboard</div>
 
     <script>
-      const root = document.documentElement;
-      const themeToggle = document.querySelector('.theme-toggle');
-      let savedTheme = null;
-      try { savedTheme = localStorage.getItem('conann-theme'); } catch {}
-      const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      root.dataset.theme = savedTheme || (preferredDark ? 'dark' : 'light');
-
-      themeToggle?.addEventListener('click', () => {
-        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-        try { localStorage.setItem('conann-theme', root.dataset.theme); } catch {}
-      });
 
       const navToggle = document.querySelector('.nav-toggle');
       const navMenu = document.querySelector('.nav-menu');
