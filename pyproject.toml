@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "conann"
+version = "0.1.1"
+description = "CPU-only Python package for the ConANN-modified FAISS bindings"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "ConANN contributors" }
+]
+keywords = ["nearest-neighbor-search", "ann", "faiss", "conann"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "numpy",
+  "packaging",
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+conann = ["*.so", "*.pyd", "lib*.so", "lib*.dylib", "*.dll"]

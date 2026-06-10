@@ -1,0 +1,55 @@
+# Secrets and local config
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+venvs/
+env/
+
+# Build outputs
+build/
+build-*/
+build_manylinux/
+build-manylinux/
+dist/
+*.egg-info/
+src/conann.egg-info/
+
+# Generated native package payload
+src/conann/
+
+# Wheel and release artifacts
+wheels/
+*.whl
+
+# Logs and verification output
+logs/
+results/
+*.log
+
+# Native build byproducts
+*.so
+*.pyd
+*.dll
+*.dylib
+*.lib
+*.obj
+*.o
+*.a
+
+# OS files
+.DS_Store
+Thumbs.db
